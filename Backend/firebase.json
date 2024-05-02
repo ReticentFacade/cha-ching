@@ -1,0 +1,14 @@
+{
+  "database": {
+    "rules": "./config/firebase_db_rules.json"
+  },
+  "hosting": {
+    "target": "cha-ching",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "cha-ching-1"
+  },
+  "targets": {
+    "cha-ching-1": {
+      "hosting": {
+        "cha-ching": [
+          "."
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
