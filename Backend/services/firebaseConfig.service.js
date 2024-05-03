@@ -27,4 +27,5 @@ console.log("firebaseApp -->", firebaseApp);
 
 // const analytics = getAnalytics(firebaseApp);
 
-const database = getDatabase(firebaseApp);
+const firebase_db = getDatabase(firebaseApp);
+export default firebase_db;

@@ -5,10 +5,13 @@
   "hosting": {
     "target": "cha-ching",
     "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  }
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+  },
+  "ignore": [
+    ".git",
+    ".runtimeconfig.json",
+    "firebase-debug.log",
+    "firebase-debug.*.log",
+    "node_modules"
+  ]
 }

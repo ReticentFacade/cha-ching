@@ -16,7 +16,7 @@ const register = async (req, res) => {
   const data = {
     username,
     email,
-    password: aesEncrypt(password),
+    hashedPassword: aesEncrypt(password),
   };
   const missingFieldsError = missingFields(data);
   if (missingFieldsError) {
@@ -25,7 +25,8 @@ const register = async (req, res) => {
 
   try {
     // Create & store the new user in DB
-    // const createdUser = ;
+    // TODO: const createdUser = ; <-- Handle it in the `services` dir
+    
 
     // When stored, use jwtGenerateToken
     const token = await jwtGenerateToken(username);
@@ -44,8 +45,7 @@ const login = async (req, res) => {
 
   const data = {
     username,
-    // password: aesDecrypt(password), -> Here, you're NOT going to decrypt this password. BUT fetch the password `string` stored in the db (using user.password) and decrypt THAT string and match it with the one received in the req.body :)
-    password,
+    hashedPassword: aesDecrypt(password),
   };
   const missingFieldsError = missingFields(data);
   if (missingFieldsError) {
@@ -54,7 +54,7 @@ const login = async (req, res) => {
 
   try {
     // Check if user exists in database.
-    // const checkUser = ;
+    // const checkUser = ; <-- Handle it in the `services` dir
 
     // If it does, generate a token for it (inside the if-statement)
     const token = await jwtGenerateToken(username);
@@ -69,7 +69,8 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
   const token = extractToken(req);
   try {
-    if (token == null) res.status(500).json({ message: "Internal Server Error" });
+    if (token == null)
+      res.status(500).json({ message: "Internal Server Error" });
 
     redisToken.deleteToken(token);
     console.log("Logout successful");
