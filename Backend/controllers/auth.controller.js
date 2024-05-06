@@ -4,9 +4,10 @@ import { jwtGenerateToken, jwtVerifyToken } from "./helpers/jwtToken.js";
 import { redisToken } from "../db/redis.db.js";
 import { missingFields } from "./helpers/missingFields.js";
 import { extractToken } from "./helpers/extractToken.js";
+import { userServices } from "../services/users.service.js";
 
 const register = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, name } = req.body;
 
   const pwStrength = checkPassword(password, username);
   if (pwStrength == "weak") {
@@ -17,6 +18,7 @@ const register = async (req, res) => {
     username,
     email,
     hashedPassword: aesEncrypt(password),
+    name,
   };
   const missingFieldsError = missingFields(data);
   if (missingFieldsError) {
@@ -25,8 +27,9 @@ const register = async (req, res) => {
 
   try {
     // Create & store the new user in DB
-    // TODO: const createdUser = ; <-- Handle it in the `services` dir
-    
+    // // TODO: const createdUser = ; <-- Handle it in the `services` dir
+    const createdUser = userServices.createUser(data);
+    if (!createdUser) throw new Error(`Error creating user:`, error);
 
     // When stored, use jwtGenerateToken
     const token = await jwtGenerateToken(username);

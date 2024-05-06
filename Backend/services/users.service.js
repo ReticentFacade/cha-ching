@@ -4,7 +4,8 @@ import firebase_db_ref, { writeData, readData } from "../db/db_ref.js";
 // User operations like: createUser, verifyUser, updateUser, deleteUser
 
 const createUser = (userData) => {
-  const { username, email, password, name } = req.body;
+  console.log("userData -->", userData.body);
+  const { username, email, password, name } = userData.body;
 
   const data = {
     username: username,
@@ -14,7 +15,7 @@ const createUser = (userData) => {
   };
 
   console.log("Data -->", data);
-  const newUser = writeData(`${{ firebase_db_ref }.toString()}/users`, data);
+  const newUser = writeData(data);
   if (!newUser) {
     console.error(`Error creating the user:`, error);
     return;

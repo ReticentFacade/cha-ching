@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import { DB_NAME } from "../config/config.js";
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref } from "firebase/database";
 
 if (!DB_NAME) throw new Error(`Error loading environment variables`);
 
@@ -23,9 +23,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-console.log("firebaseApp -->", firebaseApp);
-
 // const analytics = getAnalytics(firebaseApp);
 
 const firebase_db = getDatabase(firebaseApp);
-export default firebase_db;
+const firebase_db_ref = ref(firebase_db, "server/saving-data/fireblog");
+
+export default firebase_db_ref;
